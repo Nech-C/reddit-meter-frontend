@@ -1,34 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import './index.css'
+import SentimentSummary from './components/SentimentSummary'
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='border-2'>
+      <span className='border-2 border-amber-700'>Reddit Meter</span>
+      <span className='border-2 border-blue-700'>
+        1
+        {/* <SentimentSummary
+          data={{
+            joy: 0.8,
+            sadness: 0.1,
+            anger: 0.05,
+            fear: 0.02,
+            love: 0.03,
+            surprise: 0.01
+          }}
+      /> */}
+      </span>
+      
+    </div>
   )
 }
 
