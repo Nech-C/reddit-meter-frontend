@@ -4,11 +4,12 @@ function App() {
   
 
   return (
-    <div className='border-2'>
-      <span className='border-2 border-amber-700'>Reddit Meter</span>
-      <span className='border-2 border-blue-700'>
-        1
-        {/* <SentimentSummary
+    <div className='flex flex-col h-screen'>
+      <h1 className='text-center mb-20 text-7xl'>Reddit Meter</h1>
+      <div className='border-blue-700'>
+        
+        <h2 className='text-4xl mb-5'>Today's Reddit Sentiment:</h2>
+        <SentimentSummary
           data={{
             joy: 0.8,
             sadness: 0.1,
@@ -17,8 +18,8 @@ function App() {
             love: 0.03,
             surprise: 0.01
           }}
-      /> */}
-      </span>
+      />
+      </div>
       
     </div>
   )
