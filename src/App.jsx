@@ -1,28 +1,21 @@
+// File: src/App.jsx
 import './index.css'
-import SentimentSummary from './components/SentimentSummary'
-function App() {
-  
+import CurrentSentimentSummary from './components/CurrentSentimentSummary'
 
+function App() {
   return (
-    <div className='flex flex-col h-screen'>
-      <h1 className='text-center mb-20 text-7xl'>Reddit Meter</h1>
-      <div className='border-blue-700'>
-        
-        <h2 className='text-4xl mb-5'>Today's Reddit Sentiment:</h2>
-        <SentimentSummary
-          data={{
-            joy: 0.8,
-            sadness: 0.1,
-            anger: 0.05,
-            fear: 0.02,
-            love: 0.03,
-            surprise: 0.01
-          }}
-      />
+    <div className="flex h-screen">
+      {/* Sidebar */}
+      <div className="w-52 bg-white shadow-md py-6 px-5">
+        <h1 className="text-2xl font-bold text-amber-700">Reddit Meter</h1>
       </div>
-      
+
+      {/* Main Content */}
+      <main className="flex-1 px-6 py-10 overflow-y-auto">
+        <CurrentSentimentSummary />
+      </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

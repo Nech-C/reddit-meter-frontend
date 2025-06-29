@@ -1,9 +1,9 @@
+/* File: src/index.css */
 @import "tailwindcss";
 
 /*
 remove the default styles
 */
 * {
-  padding: 0;
   box-sizing: border-box;
 }
