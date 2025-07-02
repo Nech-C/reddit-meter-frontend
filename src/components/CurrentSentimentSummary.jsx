@@ -39,7 +39,7 @@ export default function CurrentSentimentSummary() {
         <p className="text-sm text-gray-500">
           🕒 Updated: {updatedAt.toLocaleString()}
         </p>
-        <h2 className="text-xl font-semibold text-gray-800">Current Reddit Sentiment</h2>
+        <h2 className="text-3xl font-semibold text-gray-800">Current Reddit Sentiment</h2>
       </div>
 
       <div className="w-full h-80">
