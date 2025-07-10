@@ -12,6 +12,7 @@ import {
 
 import { sentimentColors } from '../utils/sentimentColors';
 import { fetchSentimentHistory } from '../services/sentimentService';
+import LoadingDots from './LoadingDots';
 
 function formatTimestamp(timestamp, timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone) {
   const date = new Date(timestamp);
@@ -112,7 +113,7 @@ export default function SentimentHistory() {
     fetchData();
   }, []);
 
-  if (loading) return <p className="text-gray-500">Loading...</p>;
+  if (loading) return <p className="text-gray-500"><LoadingDots /></p>;
 
   const currentData = showNormalized ? dataNormalized : data;
 

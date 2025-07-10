@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {
   PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
-import { sentimentColors, sentiments } from '../utils/constants'
-import { fetchCurrentSentiment } from '../services/sentimentService';
 
+import { sentimentColors, sentiments } from '../utils/constants';
+import { fetchCurrentSentiment } from '../services/sentimentService';
+import LoadingDots from './LoadingDots';
 
 export default function CurrentSentimentSummary() {
   const [data, setData] = useState([]);
@@ -38,14 +39,15 @@ export default function CurrentSentimentSummary() {
     loadData();
   }, []);
 
-  if (loading) return <p className="text-gray-500">Loading...</p>;
+  if (loading) return <p className="text-gray-500"><LoadingDots /></p>;
 
   return (
     <div className="flex flex-col md:flex-row gap-6 h-auto md:h-[520px] p-6">
       <div className="w-full md:w-[500px] bg-white p-6 rounded-lg shadow h-auto md:h-full">
         <div className="mb-4">
           <p className="text-sm text-gray-500">
-            🕒 Updated: {updatedAt.toLocaleString()}
+            <span className="inline-block w-3 h-3 rounded-full bg-green-500 animate-pulse mr-1"></span> 
+              Updated: {updatedAt.toLocaleString()}
           </p>
           <h2 className="text-3xl font-semibold text-gray-800">Current Reddit Sentiment</h2>
         </div>
