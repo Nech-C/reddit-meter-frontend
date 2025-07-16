@@ -1,12 +1,54 @@
-# React + Vite
+# Reddit Sentiment Meter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application that visualizes the community mood on Reddit. It fetches sentiment scores from a backend service and displays both a real-time summary and a history chart for the past week.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Real‑time sentiment** – view the overall distribution of joy, sadness, anger, fear, love and surprise in a pie chart.
+- **Top posts** – inspect the highest scoring posts contributing to each sentiment.
+- **Historical trends** – toggle between raw and normalized data to explore how sentiment changes over time.
+- **Modern stack** – built with React, Vite and Tailwind CSS. Charts are rendered using Recharts.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+   The app will be available at `http://localhost:5173` by default.
+
+3. Build for production:
+
+   ```bash
+   npm run build
+   ```
+   
+   To preview the production build locally run:
+   
+   ```bash
+   npm run preview
+   ```
+
+This project relies on an external API for sentiment data. The API base URL is configured in `src/services/sentimentService.js`.
+
+## Project Structure
+
+```
+src/
+├── components/    # reusable UI components
+├── services/      # API calls
+├── utils/         # constants and helpers
+└── App.jsx        # application layout
+```
+
+## License
+
+This project is open source and available under the [MIT license](LICENSE) unless noted otherwise.

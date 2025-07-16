@@ -63,7 +63,7 @@ export default function CurrentSentimentSummary() {
                 label={({ name, percent }) =>
                   `${name}: ${(percent * 100).toFixed(1)}%`
                 }
-                onClick={(data, index) => {
+                onClick={(data) => {
                   setSelectedSentiment(data.name);
                 }}
               >
