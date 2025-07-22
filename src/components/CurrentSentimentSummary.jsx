@@ -81,8 +81,8 @@ export default function CurrentSentimentSummary() {
       
 
       <div className="w-full md:w-[600px] bg-white p-6 rounded-2xl shadow overflow-y-auto h-auto md:h-full">
-        <h3 className="mb-8">
-          {selectedSentiment}
+        <h3 className="mb-8 text-2xl font-semibold">
+          {selectedSentiment[0].toUpperCase()+selectedSentiment.slice(1)}
         </h3>
         <ol className='space-y-4'>
           {
@@ -90,21 +90,21 @@ export default function CurrentSentimentSummary() {
               .sort((a, b) => a.score - b.score)
               .map((post) => {
                 return (
-                  <li className="mb-5">
+                  <li className="mb-5 px-3 py-1 border-2 rounded-sm shadow-md bg-gray-50 border-blue-50">
                     <a
                       href={post['url']}
                       target="_blank"
-                      className="text-blue-600 font-semibold hover:underline"
+                      className="text-cyan-900 font-semibold hover:underline text-base"
                     >
                         {post['title'] || "[No title]"}
                     </a>
                     <p
-                      className = "text-sm text-gray-600 mt-1"
+                      className = "text-sm text-gray-800 mt-2"
                     >
                       {post['text'] ? post.text.slice(0, 200) + (post.length > 200 ? "..." : "") : ["No text"]}
                     </p>
 
-                    <p>
+                    <p className='text-sm'>
                       Score: {post['score'].toLocaleString()} | Comments: {post['num_comments']}
                     </p>
 
