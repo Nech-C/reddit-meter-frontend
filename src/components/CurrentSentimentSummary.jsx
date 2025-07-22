@@ -80,7 +80,7 @@ export default function CurrentSentimentSummary() {
       </div> {/* end of pie chart div*/}
       
 
-      <div className="w-full md:w-[600px] bg-white p-6 rounded-2xl shadow overflow-y-auto h-auto md:h-full">
+      <div className="w-full md:w-[600px] bg-white p-6 rounded-lg shadow overflow-y-auto h-auto md:h-full">
         <h3 className="mb-8 text-2xl font-semibold">
           {selectedSentiment[0].toUpperCase()+selectedSentiment.slice(1)}
         </h3>
@@ -99,7 +99,7 @@ export default function CurrentSentimentSummary() {
                         {post['title'] || "[No title]"}
                     </a>
                     <p
-                      className = "text-sm text-gray-800 mt-2"
+                      className = "text-sm text-gray-800 mt-2 mb-2"
                     >
                       {post['text'] ? post.text.slice(0, 200) + (post.length > 200 ? "..." : "") : ["No text"]}
                     </p>

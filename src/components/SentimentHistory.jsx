@@ -118,8 +118,8 @@ export default function SentimentHistory() {
   const currentData = showNormalized ? dataNormalized : data;
 
   return (
-    <div className="shadow rounded-2xl p-6">
-      <h2 className="text-3xl font-bold mb-4">Sentiment History</h2>
+    <div className="shadow rounded-2xl p-6 bg-white">
+      <h2 className="text-3xl font-semibold mb-4">Sentiment History</h2>
       <button
         className="shadow rounded-2xl px-4 py-1 bg-gray-200 hover:bg-gray-300 text-1xl"
         onClick={() => setShowNormalized((prev) => !prev)}
