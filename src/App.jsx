@@ -5,20 +5,29 @@ import SentimentHistory from './components/SentimentHistory';
 
 function App() {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex flex-col lg:flex-row bg-gradient-to-br from-blue-300 to-indigo-400">
       {/* Sidebar */}
-      <aside className="w-56 bg-white shadow-md py-6 px-5">
-        <h1 className="text-2xl font-bold text-amber-700 mb-4">Reddit Meter</h1>
-        <p className="text-sm text-gray-600">Track Reddit's mood in real time.</p>
+      <aside className="w-full lg:w-68 bg-white shadow-2xl py-7 px-4 flex flex-col items-center lg:items-start z-10">
+        <div className="text-center lg:text-left">
+          <h1 className="text-2xl lg:text-3xl font-extrabold text-amber-700 mb-2 tracking-wide">
+            Reddit Meter
+          </h1>
+          <p className="text-sm text-gray-700">Track Reddit's collective mood, in real-time.</p>
+        </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 px-8 py-8 overflow-y-auto space-y-12">
-        <section>
+      <main className="flex-1 p-8 lg:p-10 overflow-y-auto space-y-12">
+        <section className="animate-fade-in-up ">
           <CurrentSentimentSummary />
         </section>
-        <hr className="my-6 border-gray-300" />
-        <section>
+        <div className="flex justify-center items-center">
+            <hr className="w-full max-w-2xl border-t-2 border-gray-300 opacity-70" />
+            <span className="absolute bg-gradient-to-br from-blue-50 to-indigo-100 px-4 text-gray-500 font-semibold text-sm">
+                History
+            </span>
+        </div>
+        <section className="animate-fade-in-up delay-400">
           <SentimentHistory />
         </section>
       </main>
