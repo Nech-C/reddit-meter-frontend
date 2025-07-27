@@ -17,7 +17,7 @@ function App() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8 lg:p-10 overflow-y-auto space-y-12">
+      <main className="flex-1 p-4 lg:p-6 overflow-y-auto space-y-10">
         <section className="animate-fade-in-up ">
           <CurrentSentimentSummary />
         </section>
