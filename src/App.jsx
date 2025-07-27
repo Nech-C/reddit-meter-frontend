@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="flex flex-col lg:flex-row bg-gradient-to-br from-blue-300 to-indigo-400">
       {/* Sidebar */}
-      <aside className="w-full lg:w-68 bg-white shadow-2xl py-7 px-4 flex flex-col items-center lg:items-start z-10">
+      <aside className="w-full lg:w-68 bg-gradient-to-r from-gray-50 to-indigo-50 shadow-2xl py-7 px-4 flex flex-col items-center lg:items-start z-10">
         <div className="text-center lg:text-left">
           <h1 className="text-2xl lg:text-3xl font-extrabold text-amber-700 mb-2 tracking-wide">
             Reddit Meter
