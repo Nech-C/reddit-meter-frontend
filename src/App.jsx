@@ -23,7 +23,7 @@ function App() {
         </section>
         <div className="flex justify-center items-center">
             <hr className="w-full max-w-2xl border-t-2 border-gray-300 opacity-70" />
-            <span className="absolute bg-gradient-to-br from-blue-50 to-indigo-100 px-4 text-gray-500 font-semibold text-sm">
+            <span className="absolute px-4 text-gray-500 font-semibold text-sm">
                 History
             </span>
         </div>

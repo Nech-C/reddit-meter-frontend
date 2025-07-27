@@ -42,79 +42,108 @@ export default function CurrentSentimentSummary() {
   if (loading) return <p className="text-gray-500"><LoadingDots /></p>;
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 h-auto md:h-[520px] p-6">
-      <div className="w-full md:w-[500px] bg-white p-6 rounded-lg shadow h-auto md:h-full">
-        <div className="mb-4">
-          <p className="text-sm text-gray-500">
-            <span className="inline-block w-3 h-3 rounded-full bg-green-500 animate-pulse mr-1"></span> 
-              Updated: {updatedAt.toLocaleString()}
-          </p>
-          <h2 className="text-3xl font-semibold text-gray-800">Current Reddit Sentiment</h2>
-        </div>
+    <div className="min-h-3/4 p-4 sm:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <section className="bg-white rounded-lg shadow-2xl p-6 lg:col-span-1 transform hover:scale-110 transition-transform duration-300 ease-in-out">
+          <header className="mb-4 border-b border-gray-200 pb-2">
+            <p className="text-sm text-gray-600 flex items-center mb-1">
+              <span className="inline-block w-3 h-3 rounded-full bg-green-500 animate-pulse mr-2"></span> 
+                Updated: {updatedAt? updatedAt.toLocaleString() : "N/A"}
+            </p>
+            <h2 className="text-3xl font-extrabold text-gray-900">
+              Current Reddit Sentiment
+            </h2>
+            <p className="text-gray-600 mt-1">An overview of emotional tones from recent Reddit posts.</p>
+          </header>
 
-        <div className="w-full h-80">
-          <ResponsiveContainer>
-            <PieChart>
-              <Pie
-                data={data}
-                dataKey="value"
-                nameKey="name"
-                outerRadius={100}
-                label={({ name, percent }) =>
-                  `${name}: ${(percent * 100).toFixed(1)}%`
-                }
-                onClick={(data) => {
-                  setSelectedSentiment(data.name);
-                }}
-              >
-                {data.map((entry, index) => (
-                  <Cell key={index} fill={sentimentColors[entry.name] || "#ccc"} />
-                ))}
-              </Pie>
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+          <div className="w-full h-80">
+            <ResponsiveContainer>
+              <PieChart>
+                <Pie
+                  data={data}
+                  dataKey="value"
+                  nameKey="name"
+                  innerRadius={60}
+                  outerRadius={110}
+                  paddingAngle={3}
+                  cornerRadius={7}
+                  label={({ name, percent }) =>
+                    `${name}: ${(percent * 100).toFixed(1)}%`
+                  }
+                  onClick={(data) => {
+                    setSelectedSentiment(data.name);
+                  }}
+                >
+                  {data.map((entry, index) => (
+                    <Cell key={index} fill={sentimentColors[entry.name] || "#ccc"} />
+                  ))}
+                </Pie>
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          
+          
+        </section> {/* end of pie chart div*/}
         
-        
-      </div> {/* end of pie chart div*/}
-      
+        {/* top posts for each sentiment */}
+        <section className="bg-white rounded-lg shadow-2xl p-6 overflow-y-autol lg:col-span-1 transform hover:scale-110 transition-transform duration-300 ease-in-out">
+          <header className="mb-6 border-b border-gray-200 pb-2">
+            <h3 className="text-3xl font-extrabold text-gray-900 capitalize mb-1">
+              Top {selectedSentiment} Contributors
+            </h3>
+            <p className="text-gray-600">Discover posts driving the current {selectedSentiment} sentiment.</p>
+          </header>
+          <div className="">
+            <ol className='space-y-6'>
+              {
+                sentimentContributors[selectedSentiment]
+                  .sort((a, b) => b.score - a.score)
+                  .map((post) => {
+                    return (
+                      <li
+                        className="bg-gray-50 border border-gray-200 rounded-lg shadow-lg p-5 hover:shadow-lg transition-shadow duration-200 ease-in-out"
+                        key={post["id"]}>
+                        <p className="text-sm text-gray-500 mb-1 flex items-center">
+                          <span className="text-blue-500 mr-1">#</span> 
+                          r/{post.subreddit}
+                        </p>
+                        <a
+                          href={post['url']}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block text-xl font-bold text-blue-700 hover:text-blue-800 hover:underline mb-2 transition-colors duration-200"
+                        >
+                            {post['title'] || "[No title]"}
+                        </a>
+                        {post.text && (
+                        <p className="text-base text-gray-800 mb-3 line-clamp-3">
+                          {post.text.length > 200 ? `${post.text.slice(0, 200)}...` : post.text}
+                        </p>
+                      )}
 
-      <div className="w-full md:w-[600px] bg-white p-6 rounded-lg shadow overflow-y-auto h-auto md:h-full">
-        <h3 className="mb-8 text-2xl font-semibold">
-          {selectedSentiment[0].toUpperCase()+selectedSentiment.slice(1)}
-        </h3>
-        <ol className='space-y-4'>
-          {
-            sentimentContributors[selectedSentiment]
-              .sort((a, b) => a.score - b.score)
-              .map((post) => {
-                return (
-                  <li className="mb-5 px-3 py-1 border-2 rounded-sm shadow-md bg-gray-50 border-blue-50">
-                    <a
-                      href={post['url']}
-                      target="_blank"
-                      className="text-cyan-900 font-semibold hover:underline text-base"
-                    >
-                        {post['title'] || "[No title]"}
-                    </a>
-                    <p
-                      className = "text-sm text-gray-800 mt-2 mb-2"
-                    >
-                      {post['text'] ? post.text.slice(0, 200) + (post.length > 200 ? "..." : "") : ["No text"]}
-                    </p>
+                        <p className='text-xs text-gray-500 mb-2'>
+                          Score: {post['score'].toLocaleString()} | Comments: {post['num_comments']}
+                        </p>
+                        {post.comments?.[0]?.body && (
+                          <div className="bg-blue-50 border-l-4 border-blue-200 p-3 rounded-r-md">
+                            <p className="text-sm italic text-gray-700">
+                              <strong className="font-semibold text-blue-600">Top Comment:</strong>{" "}
+                              {post.comments[0].body.length > 150 
+                                ? `${post.comments[0].body.slice(0, 150)}...` 
+                                : post.comments[0].body}
+                            </p>
+                          </div>
+                      )}
+                      </li>
+                      
+                    )
+                  })
+              }
 
-                    <p className='text-sm'>
-                      Score: {post['score'].toLocaleString()} | Comments: {post['num_comments']}
-                    </p>
-
-                  </li>
-                  
-                )
-              })
-          }
-
-        </ol>
+            </ol>
+          </div>
+        </section>
       </div>
     </div>
   );
