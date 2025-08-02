@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: npm ci
       - run: |
-          echo "VITE_API_URL=${{ secrets.VITE_SENTIMENT_API_URL }}" >> .env.production
+          echo "VITE_SENTIMENT_API_URL=${{ secrets.VITE_SENTIMENT_API_URL }}" >> .env.production
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
