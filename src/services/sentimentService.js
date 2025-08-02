@@ -1,5 +1,7 @@
 // file: src/services/sentimentService.js
-const BASE_URL = "https://reddit-api-547471370046.us-central1.run.app";
+
+const BASE_URL = import.meta.env.VITE_SENTIMENT_API_URL;
+
 
 export async function fetchCurrentSentiment() {
   const res = await fetch(`${BASE_URL}/sentiment/current`);
