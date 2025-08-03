@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
 
 export default function LoadingDots() {
-  const [dots, setDots] = useState(".")
+  const [dots, setDots] = useState('.')
   useEffect(() => {
     const interval = setInterval(() => {
-      setDots(prev => ".".repeat((prev.length + 1) % 4))
-    }, 500);
+      setDots(prev => '.'.repeat((prev.length + 1) % 4))
+    }, 500)
 
     return () => clearInterval(interval)
   }, [])
   return (
     <>
-    Loading{dots}
+      Loading
+      {dots}
     </>
   )
 }

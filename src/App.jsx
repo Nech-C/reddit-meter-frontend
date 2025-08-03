@@ -1,7 +1,10 @@
 // File: src/App.jsx
-import './index.css';
-import CurrentSentimentSummary from './components/CurrentSentimentSummary';
-import SentimentHistory from './components/SentimentHistory';
+import React from 'react'
+
+import './index.css'
+import CurrentSentimentSummary from './components/CurrentSentimentSummary'
+
+import SentimentHistory from './components/SentimentHistory'
 
 function App() {
   return (
@@ -12,7 +15,7 @@ function App() {
           <h1 className="text-2xl lg:text-3xl font-extrabold text-amber-700 mb-2 tracking-wide">
             Reddit Meter
           </h1>
-          <p className="text-sm text-gray-700">Track Reddit's collective mood, in real-time.</p>
+          <p className="text-sm text-gray-700">Track Reddit&apos;s collective mood, in real-time.</p>
         </div>
       </aside>
 
@@ -22,17 +25,17 @@ function App() {
           <CurrentSentimentSummary />
         </section>
         <div className="flex justify-center items-center">
-            <hr className="w-full max-w-2xl border-t-2 border-gray-300 opacity-70" />
-            <span className="absolute px-4 text-gray-500 font-semibold text-sm">
-                History
-            </span>
+          <hr className="w-full max-w-2xl border-t-2 border-gray-300 opacity-70" />
+          <span className="absolute px-4 text-gray-500 font-semibold text-sm">
+            History
+          </span>
         </div>
         <section className="animate-fade-in-up delay-400">
           <SentimentHistory />
         </section>
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
