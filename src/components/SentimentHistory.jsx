@@ -176,7 +176,6 @@ export default function SentimentHistory() {
     return (
       <div className="flex justify-center items-center min-h-[400px] bg-white rounded-xl shadow-lg">
         <LoadingDots />
-        <p className="ml-3 text-lg text-gray-600">Loading sentiment history...</p>
       </div>
     )
   }
