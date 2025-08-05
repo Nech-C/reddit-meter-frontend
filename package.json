@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --fix",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "vitest run"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",
