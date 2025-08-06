@@ -21,7 +21,7 @@ import PropTypes from 'prop-types'
  * @param {string} timeZone - The IANA time zone name (e.g., 'America/New_York').
  * @returns {string} The formatted date string.
  */
-function formatTimestamp(timestamp, timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone) {
+export function formatTimestamp(timestamp, timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone) {
   const date = new Date(timestamp)
   if (isNaN(date.getTime())) return 'Invalid Date'
 
@@ -41,7 +41,7 @@ function formatTimestamp(timestamp, timeZone = Intl.DateTimeFormat().resolvedOpt
  * @param {number | string} value - The score to format.
  * @returns {number | null} The formatted score or null if invalid.
  */
-function formatScore(value) {
+export function formatScore(value) {
   const num = typeof value === 'number' ? value : parseFloat(value)
   return Number.isNaN(num) ? null : parseFloat(num.toFixed(4))
 }
@@ -51,9 +51,9 @@ function formatScore(value) {
  * @param {Array<Object>} records - Array of raw sentiment records.
  * @returns {Array<Object>} Formatted data for the chart.
  */
-function formatData(records) {
+export function formatData(records, timeZone) {
   return records.map(record => ({
-    timestamp: formatTimestamp(record.timestamp),
+    timestamp: formatTimestamp(record.timestamp, timeZone),
     joy: formatScore(record.joy),
     love: formatScore(record.love),
     fear: formatScore(record.fear),
@@ -68,7 +68,7 @@ function formatData(records) {
  * @param {Array<Object>} data - Array of formatted sentiment data.
  * @returns {Array<Object>} Normalized sentiment data.
  */
-function normalizeSentiments(data) {
+export function normalizeSentiments(data) {
   const keys = ['joy', 'love', 'fear', 'anger', 'sadness', 'surprise']
   const stats = {}
 
