@@ -74,8 +74,8 @@ const FIXTURES = {
       surprise: 3,
       love: 0.09,
       fear: 0.0,
-    }
-  ]
+    },
+  ],
 }
 
 describe('test helper functions', () => {
@@ -100,32 +100,32 @@ describe('test helper functions', () => {
   })
 
   test('normalizeSentiments', () => {
-    const result = normalizeSentiments(FIXTURES.sentimentRecordsForNorm);
+    const result = normalizeSentiments(FIXTURES.sentimentRecordsForNorm)
 
-    expect(result).toHaveLength(3);
+    expect(result).toHaveLength(3)
 
     for (const r of result) {
       for (const key of ['joy', 'love', 'fear', 'anger', 'sadness', 'surprise']) {
-        expect(typeof r[key]).toBe('number');
-        expect(Number.isNaN(r[key])).toBe(false);
+        expect(typeof r[key]).toBe('number')
+        expect(Number.isNaN(r[key])).toBe(false)
       }
     }
 
-    const joyValues = FIXTURES.sentimentRecordsForNorm.map(r => r.joy);
-    const meanJoy = joyValues.reduce((sum, x) => sum + x, 0) / joyValues.length;
-    const stdDevJoy = Math.sqrt(joyValues.reduce((sum, x) => sum + (x - meanJoy) ** 2, 0) / joyValues.length);
-    const expectedJoy0 = (FIXTURES.sentimentRecordsForNorm[0].joy - meanJoy) / stdDevJoy;
+    const joyValues = FIXTURES.sentimentRecordsForNorm.map(r => r.joy)
+    const meanJoy = joyValues.reduce((sum, x) => sum + x, 0) / joyValues.length
+    const stdDevJoy = Math.sqrt(joyValues.reduce((sum, x) => sum + (x - meanJoy) ** 2, 0) / joyValues.length)
+    const expectedJoy0 = (FIXTURES.sentimentRecordsForNorm[0].joy - meanJoy) / stdDevJoy
 
-    expect(result[0].joy).toBeCloseTo(expectedJoy0, 4);
+    expect(result[0].joy).toBeCloseTo(expectedJoy0, 4)
   })
 })
 
 describe('test SentimentHistory', () => {
   test('renders loading state', async () => {
-    vi.spyOn(sentimentService, 'fetchSentimentHistory').mockImplementation(() => new Promise(() => {}));
+    vi.spyOn(sentimentService, 'fetchSentimentHistory').mockImplementation(() => new Promise(() => {}))
 
-    render(<SentimentHistory />);
-    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+    render(<SentimentHistory />)
+    expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
   test('', async () => {
@@ -147,10 +147,10 @@ describe('test SentimentHistory', () => {
         surprise: 0.1,
         love: 0.05,
         fear: 0.03,
-      }
+      },
     ])
 
-    render(<SentimentHistory />);
+    render(<SentimentHistory />)
     await waitFor(() => {
       expect(screen.getByText('Sentiment History')).toBeInTheDocument()
       expect(screen.getByRole('button', { name: /raw data/i })).toBeInTheDocument()

@@ -16,4 +16,4 @@ Object.defineProperty(globalThis, 'ResizeObserver', {
     unobserve() {}
     disconnect() {}
   },
-});
+})
