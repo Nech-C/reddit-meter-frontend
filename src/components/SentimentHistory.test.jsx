@@ -1,6 +1,9 @@
-import { describe, test, expect } from 'vitest'
+import { describe, test, expect, vi } from 'vitest'
+import { render, screen, waitFor } from '@testing-library/react'
+import React from 'react'
 
-import { formatTimestamp, formatScore, formatData } from './SentimentHistory'
+import SentimentHistory, { formatTimestamp, formatScore, formatData, normalizeSentiments } from './SentimentHistory'
+import * as sentimentService from '../services/sentimentService'
 
 const FIXTURES = {
   timestamps: [
@@ -47,6 +50,32 @@ const FIXTURES = {
       fear: 0.02,
     }],
   ],
+  sentimentRecordsForNorm: [
+    {
+      joy: 0.5,
+      anger: 0.3,
+      sadness: 0.1,
+      surprise: 0.05,
+      love: 0.03,
+      fear: 0.0,
+    },
+    {
+      joy: 0.6,
+      anger: 0.3,
+      sadness: 0.1,
+      surprise: 3,
+      love: 0.06,
+      fear: 0.0,
+    },
+    {
+      joy: 0.4,
+      anger: 0.3,
+      sadness: 0.2,
+      surprise: 3,
+      love: 0.09,
+      fear: 0.0,
+    }
+  ]
 }
 
 describe('test helper functions', () => {
@@ -68,5 +97,63 @@ describe('test helper functions', () => {
 
   test('formatData', () => {
     expect(formatData(FIXTURES.sentimentRecords[0], 'UTC')).toStrictEqual(FIXTURES.sentimentRecords[1])
+  })
+
+  test('normalizeSentiments', () => {
+    const result = normalizeSentiments(FIXTURES.sentimentRecordsForNorm);
+
+    expect(result).toHaveLength(3);
+
+    for (const r of result) {
+      for (const key of ['joy', 'love', 'fear', 'anger', 'sadness', 'surprise']) {
+        expect(typeof r[key]).toBe('number');
+        expect(Number.isNaN(r[key])).toBe(false);
+      }
+    }
+
+    const joyValues = FIXTURES.sentimentRecordsForNorm.map(r => r.joy);
+    const meanJoy = joyValues.reduce((sum, x) => sum + x, 0) / joyValues.length;
+    const stdDevJoy = Math.sqrt(joyValues.reduce((sum, x) => sum + (x - meanJoy) ** 2, 0) / joyValues.length);
+    const expectedJoy0 = (FIXTURES.sentimentRecordsForNorm[0].joy - meanJoy) / stdDevJoy;
+
+    expect(result[0].joy).toBeCloseTo(expectedJoy0, 4);
+  })
+})
+
+describe('test SentimentHistory', () => {
+  test('renders loading state', async () => {
+    vi.spyOn(sentimentService, 'fetchSentimentHistory').mockImplementation(() => new Promise(() => {}));
+
+    render(<SentimentHistory />);
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  })
+
+  test('', async () => {
+    vi.spyOn(sentimentService, 'fetchSentimentHistory').mockResolvedValue([
+      {
+        timestamp: 1709182800000,
+        joy: 0.5,
+        anger: 0.3,
+        sadness: 0.1,
+        surprise: 0.05,
+        love: 0.03,
+        fear: 0.02,
+      },
+      {
+        timestamp: 1704085199000,
+        joy: 0.6,
+        anger: 0.25,
+        sadness: 0.15,
+        surprise: 0.1,
+        love: 0.05,
+        fear: 0.03,
+      }
+    ])
+
+    render(<SentimentHistory />);
+    await waitFor(() => {
+      expect(screen.getByText('Sentiment History')).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /raw data/i })).toBeInTheDocument()
+    })
   })
 })
