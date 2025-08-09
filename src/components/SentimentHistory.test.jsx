@@ -128,7 +128,7 @@ describe('test SentimentHistory', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
-  test('', async () => {
+  test('renders sentiment history', async () => {
     vi.spyOn(sentimentService, 'fetchSentimentHistory').mockResolvedValue([
       {
         timestamp: 1709182800000,
