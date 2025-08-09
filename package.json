@@ -6,11 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --fix",
+    "lint": "eslint . --fix --max-warnings=0",
     "preview": "vite preview",
     "prepare": "husky",
     "test": "vitest run",
     "prepush": "eslint . --fix && vitest run"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --fix --max-warnings=0"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",
